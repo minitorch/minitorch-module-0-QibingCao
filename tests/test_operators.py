@@ -144,7 +144,7 @@ def test_distribute(a: float, b: float, c: float) -> None:
     Write a test that ensures that your operators distribute, i.e.
     :math:`z \times (x + y) = z \times x + z \times y`
     """
-    assert mul(c, add(a, b)) == add(mul(a, c), mul(b, c))
+    assert_close(mul(c, add(a, b)), add(mul(a, c), mul(b, c)))
 
 
 @pytest.mark.task0_2
@@ -184,8 +184,9 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    gen = addLists(ls1, ls2)
+    for i, j, k in zip(ls1, ls2, gen):
+        assert k == i + j
 
 
 @pytest.mark.task0_3
