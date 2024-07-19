@@ -65,8 +65,7 @@ class Module:
             for child_name, child_module in cur._modules.items():
                 new_child_name = ancestor_name + "." + child_name if ancestor_name else child_name
                 parameters.extend(named_helper(child_module, new_child_name))
-            print(parameters)
-
+            # print(parameters)
             return parameters
 
         return named_helper(self, "")
