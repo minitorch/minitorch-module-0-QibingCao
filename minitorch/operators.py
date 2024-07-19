@@ -3,6 +3,7 @@ Collection of the core mathematical operators used throughout the code base.
 """
 
 import math
+import typing
 from typing import Callable, Iterable
 
 
@@ -127,8 +128,8 @@ def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[fl
          new list
     """
 
-    def _map(ls: [Iterable[float]]) -> Iterable[float]:
-        ret = []
+    def _map(ls: Iterable[float]) -> Iterable[float]:
+        ret: typing.List[float] = []
         for item in ls:
             ret.append(fn(item))
         return ret

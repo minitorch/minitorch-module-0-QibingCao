@@ -56,7 +56,7 @@ class Module:
             The name and `Parameter` of each ancestor parameter.
         """
 
-        def named_helper(cur: Module, ancestor_name: str):
+        def named_helper(cur: Module, ancestor_name: str) -> Sequence[Tuple[str, Parameter]]:
             parameters = []
             for name, para in cur._parameters.items():
                 new_name = ancestor_name + "." + name if ancestor_name else name
@@ -72,7 +72,8 @@ class Module:
 
     def parameters(self) -> Sequence[Parameter]:
         "Enumerate over all the parameters of this module and its descendents."
-        parameters = []
+
+        parameters: list[Parameter] = []
         parameters.extend(self._parameters.values())
         for module in self._modules.values():
             parameters.extend(module.parameters())
