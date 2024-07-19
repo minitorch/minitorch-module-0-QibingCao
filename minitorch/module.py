@@ -32,14 +32,20 @@ class Module:
     def train(self) -> None:
         "Set the mode of this module and all descendent modules to `train`."
         self.training = True
-        for module in self._modules.keys():  # set mode recursively
-            self._modules[module].train()
+        for module in self._modules.values():
+            module.train()
 
     def eval(self) -> None:
         "Set the mode of this module and all descendent modules to `eval`."
         self.training = False
-        for module in self._modules.keys():  # set mode recursively
-            self._modules[module].train()
+        for module in self._modules.values():
+            module.eval()
+
+    def forward(self, *args: Any, **kwargs: Any) -> Any:
+        """
+        The forward method that should be overridden by all subclasses.
+        """
+        raise NotImplementedError("Forward method not implemented")
 
     def named_parameters(self) -> Sequence[Tuple[str, Parameter]]:
         """
